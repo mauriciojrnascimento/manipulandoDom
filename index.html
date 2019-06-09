@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>exercicio01</title>
+    </head>
+    <body>
+        <div id="container">
+            <button class="botaoAdd">Adicionar Box</button>
+            <button class="botaoRemove">Remover Box</button>
+            <button class="botaoRemoveAll">Remover todas as Box</button>
+        </div>
+    </body>
+    <script>
+        var buttonAddElement = document.querySelector('.botaoAdd');
+        var buttonRemoveElement = document.querySelector('.botaoRemove');
+        var buttonRemoveAllElement = document.querySelector('.botaoRemoveAll');
+        var element = document.querySelector('div');
+
+        buttonAddElement.onclick = function(){            
+            var boxElement = document.createElement('div');            
+            element.appendChild(boxElement);
+            boxElement.className = 'box';
+            boxElement.style.width = 100;
+            boxElement.style.height = 100;
+            boxElement.style.backgroundColor = 'f00';
+            boxElement.style.marginTop = 5;
+        }
+
+        buttonRemoveElement.onclick = function(){
+            var boxElement = document.querySelector('.box');
+            element.removeChild(boxElement);
+        }
+
+        buttonRemoveAllElement.onclick = function(){
+            var boxElement = document.querySelectorAll('.box');
+            console.log(boxElement);
+        }
+
+
+    </script>
+
+</html>
