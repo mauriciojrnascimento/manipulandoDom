@@ -20,12 +20,6 @@
         var parentElement = document.querySelector('#container');
 
         buttonAddElement.onclick = function(){
-            if(element == null){
-                console.log("entrou");
-                var elementNew = document.createElement('div');
-                parentElement.appendChild(elementNew);
-                elementNew.setAttribute('id','boxesContainer');
-            }
             var boxElement = document.createElement('div');            
             element.appendChild(boxElement);
             boxElement.className = 'box';
@@ -41,7 +35,11 @@
         }
 
         buttonRemoveAllElement.onclick = function(){            
-            parentElement.removeChild(element);
+            let boxElement = document.querySelectorAll('div.box');
+            let qtd = boxElement.length
+            for (let i = 0; i < qtd; i++) { 
+                element.removeChild(boxElement[i]);
+            }
         }
     </script>
 
