@@ -1,46 +1,48 @@
 <html>
-    <head>
-        <title>exercicio01</title>
-    </head>
-    <body>
-        <div id="container">
-            <button class="botaoAdd">Adicionar Box</button>
-            <button class="botaoRemove">Remover Box</button>
-            <button class="botaoRemoveAll">Remover todas as Box</button>
-            <div id="boxesContainer">
+	<head>
+		<title>Boxes</title>
+	</head>
+	<body>
+		<button id='buttonAdd'>Adicionar</button>
+		<button id='buttonRemove'>Remover</button>
+		<button id='buttonRemoveAll'>Remover tudo</button>
+		<div id='boxContainer'></div>
+		<script>
+			var add = document.querySelector('#buttonAdd');
+			var remove = document.querySelector('#buttonRemove');
+			var removeAll = document.querySelector('#buttonRemoveAll');
+			var container = document.querySelector('#boxContainer');
 
-            </div>
-        </div>
-    </body>
-    <script>
-        var buttonAddElement = document.querySelector('.botaoAdd');
-        var buttonRemoveElement = document.querySelector('.botaoRemove');
-        var buttonRemoveAllElement = document.querySelector('.botaoRemoveAll');
-        var element = document.querySelector('#boxesContainer');
-        var parentElement = document.querySelector('#container');
+			function randomColor(){
+				color = Math.round(Math.random() * (0,255));
+				return color;				
+			}
 
-        buttonAddElement.onclick = function(){
-            var boxElement = document.createElement('div');            
-            element.appendChild(boxElement);
-            boxElement.className = 'box';
-            boxElement.style.width = 100;
-            boxElement.style.height = 100;
-            boxElement.style.backgroundColor = 'f00';
-            boxElement.style.marginTop = 5;
-        }
+			add.onclick = function(){
+				box = document.createElement('div');
+				container.appendChild(box);								
+				box.className = 'box';
+				box.style.width = 100;
+				box.style.height = 100;
+				box.style.backgroundColor = 'rgb(' + randomColor() + ',' + randomColor() + ',' + randomColor() + ')';
+				box.style.marginLeft = 5;
+				box.style.marginTop = 5;
+				box.style.display = 'inline-block';
+			}			
 
-        buttonRemoveElement.onclick = function(){
-            var boxElement = document.querySelector('.box');
-            element.removeChild(boxElement);
-        }
+			remove.onclick = function(){
+				box = container.lastChild;
+				container.removeChild(box);
+			}
 
-        buttonRemoveAllElement.onclick = function(){            
-            let boxElement = document.querySelectorAll('div.box');
-            let qtd = boxElement.length
-            for (let i = 0; i < qtd; i++) { 
-                element.removeChild(boxElement[i]);
-            }
-        }
-    </script>
+			removeAll.onclick = function(){
+				boxes = document.querySelectorAll('.box');
+				nodeSize = boxes.length;				
 
+				for(i=0;i < nodeSize; i++){
+					container.removeChild(boxes[i]);
+				}
+			}
+		</script>
+	</body>
 </html>
