@@ -7,15 +7,25 @@
             <button class="botaoAdd">Adicionar Box</button>
             <button class="botaoRemove">Remover Box</button>
             <button class="botaoRemoveAll">Remover todas as Box</button>
+            <div id="boxesContainer">
+
+            </div>
         </div>
     </body>
     <script>
         var buttonAddElement = document.querySelector('.botaoAdd');
         var buttonRemoveElement = document.querySelector('.botaoRemove');
         var buttonRemoveAllElement = document.querySelector('.botaoRemoveAll');
-        var element = document.querySelector('div');
+        var element = document.querySelector('#boxesContainer');
+        var parentElement = document.querySelector('#container');
 
-        buttonAddElement.onclick = function(){            
+        buttonAddElement.onclick = function(){
+            if(element == null){
+                console.log("entrou");
+                var elementNew = document.createElement('div');
+                parentElement.appendChild(elementNew);
+                elementNew.setAttribute('id','boxesContainer');
+            }
             var boxElement = document.createElement('div');            
             element.appendChild(boxElement);
             boxElement.className = 'box';
@@ -30,12 +40,9 @@
             element.removeChild(boxElement);
         }
 
-        buttonRemoveAllElement.onclick = function(){
-            var boxElement = document.querySelectorAll('.box');
-            element.remove(boxElement);
+        buttonRemoveAllElement.onclick = function(){            
+            parentElement.removeChild(element);
         }
-
-
     </script>
 
 </html>
