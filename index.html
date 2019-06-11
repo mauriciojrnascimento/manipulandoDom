@@ -3,36 +3,55 @@
 		<title>Boxes</title>
 	</head>
 	<body>
-		<button id='buttonAdd'>Adicionar</button>
-		<button id='buttonRemove'>Remover</button>
-		<button id='buttonRemoveAll'>Remover tudo</button>
+		<button id='buttonAdd'>Add</button>
+		<button id='buttonRemove'>Remove</button>
+		<button id='buttonRemoveAll'>Clear</button>
+		<input disabled placeholder="" id='count'>
 		<div id='boxContainer'></div>
+
 		<script>
 			var add = document.querySelector('#buttonAdd');
 			var remove = document.querySelector('#buttonRemove');
 			var removeAll = document.querySelector('#buttonRemoveAll');
-			var container = document.querySelector('#boxContainer');
+			var container = document.querySelector('#boxContainer');						
+			var boxId = 0;		
+            
 
 			function randomColor(){
 				color = Math.round(Math.random() * (0,255));
 				return color;				
+            }
+
+            function changeColor(id){                
+                box = document.getElementById('box'+id+'');              
+                box.style.backgroundColor = 'rgb(' + randomColor() + ',' + randomColor() + ',' + randomColor() + ')';                                            
+			}
+			
+			function updateCount(count){
+				document.getElementById('count').placeholder = count + " box";
 			}
 
-			add.onclick = function(){
-				box = document.createElement('div');
+			add.onclick = function(){				
+                box = document.createElement('div');
 				container.appendChild(box);								
-				box.className = 'box';
+                box.className = 'box';                
+                box.setAttribute('id', 'box'+boxId+'');                
+                box.setAttribute('onmouseover', 'changeColor('+boxId+')');
 				box.style.width = 100;
 				box.style.height = 100;
 				box.style.backgroundColor = 'rgb(' + randomColor() + ',' + randomColor() + ',' + randomColor() + ')';
 				box.style.marginLeft = 5;
 				box.style.marginTop = 5;
-				box.style.display = 'inline-block';
+                box.style.display = 'inline-block';
+				boxId++;			
+				updateCount(boxId);
 			}			
 
 			remove.onclick = function(){
 				box = container.lastChild;
-				container.removeChild(box);
+                container.removeChild(box);
+				boxId--;
+				updateCount(boxId);
 			}
 
 			removeAll.onclick = function(){
@@ -41,8 +60,11 @@
 
 				for(i=0;i < nodeSize; i++){
 					container.removeChild(boxes[i]);
-				}
-			}
+                }
+				boxId = 0;
+				updateCount(boxId);
+            }
+            
 		</script>
 	</body>
 </html>
